@@ -6,6 +6,7 @@ type Crowdfund @entity {
   startsAt: BigInt!
   endsAt: BigInt!
   goal: BigInt!
+  noGoal: Boolean!
   metaPtr: String!
   canRefund: Boolean!
   createdAt: BigInt!

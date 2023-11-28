@@ -28,6 +28,7 @@ export function handleNewCrowdfund(event: CrowdfundCreated): void {
   crowdfund.startsAt = crowdfundContract.startsAt();
   crowdfund.endsAt = crowdfundContract.endsAt();
   crowdfund.goal = crowdfundContract.goal();
+  crowdfund.noGoal = crowdfundContract.noGoal();
   crowdfund.metaPtr = crowdfundContract.metaPtr().toString();
   crowdfund.canRefund = crowdfundContract.canRefund();
   crowdfund.createdAt = event.block.timestamp;

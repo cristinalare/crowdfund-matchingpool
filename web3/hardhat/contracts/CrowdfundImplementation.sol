@@ -25,6 +25,9 @@ contract CrowdfundImplementation is Ownable, Initializable, ReentrancyGuard {
     uint256 public startsAt;
     uint256 public endsAt;
     uint256 public goal;
+
+    bool public noGoal;
+
     bytes public metaPtr;
 
     bool public canRefund;
@@ -61,6 +64,7 @@ contract CrowdfundImplementation is Ownable, Initializable, ReentrancyGuard {
             uint256 _startsAt,
             uint256 _endsAt,
             uint256 _goal,
+            bool _noGoal,
             bytes memory _metaPtr
         ) = abi.decode(
                 meta,
@@ -71,7 +75,7 @@ contract CrowdfundImplementation is Ownable, Initializable, ReentrancyGuard {
             revert dateError();
         }
 
-        if (_goal < 1) {
+        if (_goal < 1 && !_noGoal) {
             revert invalidGoal();
         }
 

@@ -23,6 +23,7 @@ export const CreateCrowdfundSchema = z.object({
   token: z.string(),
   safe: z.string(),
   goal: z.string(),
+  noGoal: z.string(),
   startsAt: z.string().nullish(),
   endsAt: z.string().nullish(),
 });
@@ -93,12 +94,14 @@ const CreateForm = () => {
 
         const startAt = Math.floor(Date.now() / 1000) + 600
 
+        const noGoal = !Number(goal);
         const params = encodeCrowdfundParams([
           safe,
           token,
           startAt,
           endsAt,
           ethers.utils.parseUnits(goal, decimals),
+          noGoal,
           ethers.utils.toUtf8Bytes(metaPtr),
         ]);
 
@@ -117,8 +120,8 @@ const CreateForm = () => {
       <FormControl label="Safe address" name="safe">
         <Input required placeholder="0x..." />
       </FormControl>
-      <FormControl label="Fundraising goal" name="goal">
-        <Input min={0} required type="number" placeholder="1000" />
+      <FormControl label="Fundraising goal (optional)" name="goal">
+        <Input min={0} type="number" placeholder="1000" />
       </FormControl>
 
       <FormControl label="Token" name="token">
